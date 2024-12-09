@@ -1,9 +1,9 @@
 # Articles App
 
 # Medium Articles
-[Clean Architecture in Flutter](https://medium.com/@yamen.abd98/clean-architecture-in-flutter-mvvm-bloc-dio-79b1615530e1)
+[Clean Architecture in Flutter]
 
-[Unit Testing with Clean Architecture in Flutter | Mockito](https://medium.com/@yamen.abd98/unit-testing-in-flutter-with-clean-architecture-49d403645b4d)
+[Unit Testing with Clean Architecture in Flutter | Mockito]
 
 
 
@@ -20,7 +20,7 @@ Articles, display article details, and see more about details from url.
 
 ## Installing
 
-- Clone the repository ```git clone https://github.com/YAMMEN98/ny-times-flutter-app.git```
+- Clone the repository ```git clone https://github.com/AllenceAlbiorix/bloc_mvvm_di.git```
 - Open the project in Android Studio or VS Code.
 - Run the app on an emulator or physical device.
 
@@ -35,7 +35,7 @@ Articles, display article details, and see more about details from url.
 - View Image And Zoom It.
 - Create a lane to generate apk automatically when upload code to the main branch.
 
-![Text Coverage](https://github.com/YAMMEN98/ny-times-flutter-app/blob/main/actions.png)
+
 
 - Apply Unit Testing .
 
@@ -66,8 +66,7 @@ report, follow these steps to run it:
       by ```flutter pub run test_cov_console -c --output=coverage/test_coverage.csv```
     - Open CSV file by excel and you will see like this result:
 
-      ![Text Coverage](https://github.com/YAMMEN98/ny-times-flutter-app/blob/main/test_coverage.png)
+
 
 ## Author
-
-Yamen Abdullrahman - Senior Flutter Developer;
+Allence Vakharia - Flutter Developer;
