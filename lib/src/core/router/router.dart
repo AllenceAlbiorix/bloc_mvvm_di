@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+import 'package:ny_times_app/src/core/utils/log/app_logger.dart';
 import 'package:ny_times_app/src/shared/presentation/pages/photo_view_page.dart';
 import 'package:ny_times_app/src/shared/presentation/pages/web_view_page.dart';
 import 'package:ny_times_app/src/features/articles/domain/models/article_model.dart';
@@ -24,8 +26,7 @@ class AppRouter {
         return CupertinoPageRoute(
           settings: RouteSettings(name: settings.name),
           builder: (_) {
-            assert(
-                settings.arguments != null, "nyTimesArticleModel is required");
+            assert(settings.arguments != null, "nyTimesArticleModel is required");
             return ArticleDetailsPage(
               model: settings.arguments as ArticleModel,
             );
@@ -46,8 +47,7 @@ class AppRouter {
         return CupertinoPageRoute(
           settings: RouteSettings(name: settings.name),
           builder: (_) {
-            Map<String, dynamic>? args =
-                settings.arguments as Map<String, dynamic>?;
+            Map<String, dynamic>? args = settings.arguments as Map<String, dynamic>?;
             assert(args != null, "You should pass 'path' and 'fromNet'");
             return PhotoViewPage(
               path: args!['path'],
@@ -66,5 +66,31 @@ class AppRouter {
           ),
         );
     }
+  }
+}
+
+class CustomRouteObserver extends NavigatorObserver {
+  @override
+  void didPush(Route route, Route? previousRoute) {
+    super.didPush(route, previousRoute);
+    logger.log(Level.debug, 'Pushed: ${route.settings.name}');
+    if (previousRoute != null) {
+      print('From: ${previousRoute.settings.name}');
+    }
+  }
+
+  @override
+  void didPop(Route route, Route? previousRoute) {
+    super.didPop(route, previousRoute);
+    print('Popped: ${route.settings.name}');
+    if (previousRoute != null) {
+      print('Back to: ${previousRoute.settings.name}');
+    }
+  }
+
+  @override
+  void didReplace({Route? newRoute, Route? oldRoute}) {
+    super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
+    print('Replaced: ${oldRoute?.settings.name} with ${newRoute?.settings.name}');
   }
 }
