@@ -1,14 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:ny_times_app/src/core/router/app_go_router.gr.dart';
 import 'package:ny_times_app/src/core/router/app_route_enum.dart';
-import 'package:ny_times_app/src/features/articles/domain/models/article_model.dart';
-import 'package:ny_times_app/src/features/articles/presentation/pages/article_details_page.dart';
-import 'package:ny_times_app/src/features/articles/presentation/pages/articles_page.dart';
-import 'package:ny_times_app/src/features/intro/presentation/pages/intro_page.dart';
-import 'package:ny_times_app/src/shared/presentation/pages/photo_view_page.dart';
-import 'package:ny_times_app/src/shared/presentation/pages/web_view_page.dart';
 
-class AppGoRouter {
+/*class AppGoRouter {
   static String currentRoute = AppRouteEnum.intro.path;
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -67,4 +61,48 @@ class AppGoRouter {
       ),
     ),
   );
+}*/
+
+const ArticlesTab = EmptyShellRoute('ArticlesTab');
+
+@AutoRouterConfig()
+class AppAutoRouter extends RootStackRouter {
+
+
+
+  @override
+  List<AutoRoute> get routes => [
+        AutoRoute(
+          path: AppRouteEnum.intro.path,
+          page: IntroPageRoute.page,
+          initial: true,
+        ),
+        AutoRoute(
+            path: AppRouteEnum.dashboard.path,
+            page: DashboardRoute.page,
+            children: [
+              AutoRoute(
+                  path: AppRouteEnum.articlesPage.path,
+                  page: ArticlesTab.page,
+                  initial: true,
+                  children: [
+                    AutoRoute(path: '', page: ArticlesRoute.page),
+                    AutoRoute(
+                        path: AppRouteEnum.articleDetailsPage.path,
+                        page: ArticleDetailsRoute.page),
+                    AutoRoute(
+                      path: AppRouteEnum.photoViewPage.path,
+                      page: PhotoViewRoute.page,
+                    ),
+                    AutoRoute(
+                      path: AppRouteEnum.weViewPage.path,
+                      page: WebViewRoute.page,
+                    ),
+                  ]),
+              AutoRoute(
+                path: 'settings',
+                page: SettingsRoute.page,
+              ),
+            ]),
+      ];
 }

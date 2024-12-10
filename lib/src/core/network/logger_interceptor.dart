@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:logging/logging.dart';
+import 'package:logger/logger.dart';
 
 class LoggerInterceptor extends Interceptor {
   LoggerInterceptor(
@@ -100,7 +100,7 @@ class LoggerInterceptor extends Interceptor {
   }
 
   void _printKVError(String key, Object v) {
-    logger.severe('$key: $v');
+    logger.e('$key: $v');
   }
 
   void _printAll(msg) {
@@ -108,6 +108,6 @@ class LoggerInterceptor extends Interceptor {
   }
 
   void logPrint(String text) {
-    logger.info(text);
+    logger.i(text);
   }
 }

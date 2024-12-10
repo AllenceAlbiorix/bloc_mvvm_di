@@ -1,7 +1,5 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:ny_times_app/src/core/router/app_go_router.dart';
-import 'package:ny_times_app/src/core/router/app_route_enum.dart';
 
 class ArrowBackButtonWidget extends StatelessWidget {
   final Function()? callback;
@@ -18,12 +16,9 @@ class ArrowBackButtonWidget extends StatelessWidget {
         onPressed: () {
           // GoRouter.of(context).routerDelegate.currentConfiguration.matches.toList() ;
           callback?.call();
-          if (context.canPop()) {
-            context.pop();
-          } else {
-            context.replaceNamed(AppRouteEnum.articlesPage.name);
-          }
-        },
+          context.maybePop();
+
+          },
         constraints: const BoxConstraints(),
         padding: EdgeInsets.zero,
         icon: Icon(

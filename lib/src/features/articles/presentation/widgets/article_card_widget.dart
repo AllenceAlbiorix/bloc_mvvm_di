@@ -1,13 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'package:ny_times_app/src/core/router/app_go_router.dart';
-import 'package:ny_times_app/src/shared/presentation/widgets/cached_image_widget.dart';
-import 'package:ny_times_app/src/core/router/app_route_enum.dart';
+import 'package:ny_times_app/src/core/helper/helper.dart';
+import 'package:ny_times_app/src/core/router/app_go_router.gr.dart';
 import 'package:ny_times_app/src/core/styles/app_colors.dart';
 import 'package:ny_times_app/src/core/utils/constant/app_constants.dart';
-import 'package:ny_times_app/src/core/helper/helper.dart';
 import 'package:ny_times_app/src/features/articles/domain/models/article_model.dart';
+import 'package:ny_times_app/src/shared/presentation/widgets/cached_image_widget.dart';
 
 class ArticleCardWidget extends StatefulWidget {
   final ArticleModel nyTimesModel;
@@ -61,14 +60,16 @@ class _ArticleCardWidgetState extends State<ArticleCardWidget> {
               tag: bigImageUrl!,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    AppRouteEnum.photoViewPage.name,
-                    arguments: {
-                      "path": bigImageUrl!,
-                      "fromNet": true,
-                    },
-                  );
+                  context.pushRoute(PhotoViewRoute(path: bigImageUrl!, fromNet: true));
+
+                  /*  context.router
+                      .navigate(
+                    PhotoViewRoute(path: bigImageUrl!, fromNet: true),
+                  )
+                      .catchError((onError) {
+                    logger.log(Level.ALL, onError);
+                    return false;
+                  });*/
                 },
                 child: CachedImageWidget(
                   imageUrl: smallImageUrl!,
@@ -162,8 +163,7 @@ class _ArticleCardWidgetState extends State<ArticleCardWidget> {
             padding: EdgeInsets.zero,
             constraints: BoxConstraints(),
             onPressed: () {
-              context.pushNamed(AppRouteEnum.articleDetailsPage.name,
-                  extra: widget.nyTimesModel);
+              context.pushRoute(ArticleDetailsRoute(model: widget.nyTimesModel));
 
               // Navigator.pushNamed(
               //   context,

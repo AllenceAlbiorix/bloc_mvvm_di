@@ -4,7 +4,6 @@ import 'package:ny_times_app/src/shared/domain/entities/language_enum.dart';
 import 'package:ny_times_app/src/core/utils/constant/app_constants.dart';
 import 'package:ny_times_app/src/core/utils/injections.dart';
 
-
 class Helper {
   /// Get language
   static LanguageEnum getLang() {
@@ -16,12 +15,7 @@ class Helper {
 
   /// Get svg picture path
   static String getSvgPath(String name) {
-    return "$svgPath$name";
-  }
-
-  /// Get image picture path
-  static String getImagePath(String name) {
-    return "$imagePath$name";
+    return "$svgPath$name" + '.svg';
   }
 
   /// Get vertical space

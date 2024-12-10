@@ -1,11 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:ny_times_app/src/shared/presentation/pages/background_page.dart';
 import 'package:ny_times_app/src/shared/presentation/widgets/app_loader.dart';
 import 'package:ny_times_app/src/shared/presentation/widgets/arrow_back_button_widget.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+@RoutePage()
 class WebViewPage extends StatefulWidget {
   final String link;
 
@@ -59,15 +61,12 @@ class _WebViewPageState extends State<WebViewPage> {
             child: GestureDetector(
               behavior: HitTestBehavior.translucent,
               onTap: () {
-                GoRouter.of(context).routerDelegate.currentConfiguration.matches.toList();
+                // GoRouter.of(context).routerDelegate.currentConfiguration.matches.toList();
               },
               child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: SizedBox(
-                      height: 20,
-                      width: 20,
-                      child: ArrowBackButtonWidget()),
-                ),
+                padding: const EdgeInsets.all(10.0),
+                child: SizedBox(height: 20, width: 20, child: ArrowBackButtonWidget()),
+              ),
             ),
           ),
           SizedBox(

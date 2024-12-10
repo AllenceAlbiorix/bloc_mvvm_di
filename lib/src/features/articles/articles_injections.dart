@@ -13,3 +13,4 @@ initArticlesInjections() {
   sl.registerSingleton<ArticlesSharedPrefs>(ArticlesSharedPrefs(sl()));
   sl.registerSingleton<ArticlesUseCase>(ArticlesUseCase(sl()));
 }
+

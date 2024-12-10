@@ -1,11 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ny_times_app/src/core/helper/helper.dart';
 import 'package:ny_times_app/src/core/translations/l10n.dart';
-import 'package:ny_times_app/src/core/utils/injections.dart';
 import 'package:ny_times_app/src/features/articles/domain/models/article_model.dart';
-import 'package:ny_times_app/src/features/articles/domain/repositories/abstract_articles_repository.dart';
 import 'package:ny_times_app/src/features/articles/presentation/bloc/articles_bloc.dart';
 import 'package:ny_times_app/src/features/articles/presentation/widgets/article_card_widget.dart';
 import 'package:ny_times_app/src/shared/presentation/pages/background_page.dart';
@@ -15,6 +14,7 @@ import 'package:ny_times_app/src/shared/presentation/widgets/reload_widget.dart'
 import 'package:ny_times_app/src/shared/presentation/widgets/text_field_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+@RoutePage()
 class ArticlesPage extends StatefulWidget {
   const ArticlesPage({Key? key}) : super(key: key);
 
@@ -23,8 +23,6 @@ class ArticlesPage extends StatefulWidget {
 }
 
 class _ArticlesPageState extends State<ArticlesPage> {
-  ArticlesBloc _bloc = ArticlesBloc(articlesRepository: sl<AbstractArticlesRepository>());
-
   // Key for scaffold to open drawer
   GlobalKey<ScaffoldState> _key = GlobalKey();
 
@@ -43,8 +41,11 @@ class _ArticlesPageState extends State<ArticlesPage> {
   // Period
   int selectedPeriod = 1;
 
+  late ArticlesBloc _bloc;
+
   @override
   void initState() {
+    _bloc = context.read<ArticlesBloc>();
     // Call event to get ny times article
     callArticles();
     super.initState();

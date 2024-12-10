@@ -1,11 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:ny_times_app/src/core/helper/helper.dart';
-import 'package:ny_times_app/src/core/router/app_go_router.dart';
 import 'package:ny_times_app/src/core/router/app_route_enum.dart';
 import 'package:ny_times_app/src/core/styles/app_colors.dart';
+import 'package:ny_times_app/src/core/utils/constant/image_constant.dart';
 
+@RoutePage(name: "IntroPageRoute")
 class IntroPage extends StatefulWidget {
   const IntroPage({Key? key}) : super(key: key);
 
@@ -21,7 +22,7 @@ class _IntroPageState extends State<IntroPage> {
         seconds: 1,
       ),
       () {
-        context.replaceNamed(AppRouteEnum.articlesPage.name);
+        context.router.replaceNamed(AppRouteEnum.dashboard.path);
         // Navigator.pushNamedAndRemoveUntil(
         //   context,
         //   AppRouteEnum.articlesPage.path,
@@ -39,7 +40,7 @@ class _IntroPageState extends State<IntroPage> {
         child: Padding(
           padding: EdgeInsets.all(15.sp),
           child: Image.asset(
-            Helper.getImagePath("logo.png"),
+            ImagePaths.logo,
             color: Helper.isDarkTheme() ? AppColors.white : null,
             width: 300.w,
             height: 300.h,

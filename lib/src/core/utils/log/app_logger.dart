@@ -1,20 +1,19 @@
-import 'dart:developer' as developer;
-
 import 'package:flutter/foundation.dart';
-import 'package:logging/logging.dart';
+import 'package:logger/logger.dart';
 
-Logger logger = Logger("App Logger");
+Logger logger =
+    Logger(printer: PrettyPrinter(levelColors: {Level.debug: AnsiColor.fg(199)}));
 
 void initRootLogger() {
   // only enable logging for debug mode
   if (kDebugMode) {
-    Logger.root.level = Level.ALL;
+    Logger.level = Level.all;
   } else {
-    Logger.root.level = Level.OFF;
+    Logger.level = Level.off;
   }
-  hierarchicalLoggingEnabled = true;
+  // hierarchicalLoggingEnabled = true;
 
-  Logger.root.onRecord.listen((record) {
+  Logger.addLogListener((record) {
     if (!kDebugMode) {
       return;
     }
@@ -39,10 +38,10 @@ void initRootLogger() {
     }
 
     final message = '$end$start${record.message}$end';
-    developer.log(
+    /*developer.log(
       message,
       // name: record.loggerName.padRight(25),
       level: record.level.value,
-    );
+    );*/
   });
 }

@@ -1,23 +1,23 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'package:ny_times_app/src/core/router/app_go_router.dart';
-import 'package:ny_times_app/src/shared/presentation/pages/background_page.dart';
-import 'package:ny_times_app/src/shared/presentation/widgets/arrow_back_button_widget.dart';
-import 'package:ny_times_app/src/shared/presentation/widgets/cached_image_widget.dart';
-import 'package:ny_times_app/src/shared/presentation/widgets/custom_app_bar_widget.dart';
+import 'package:ny_times_app/src/core/helper/helper.dart';
+import 'package:ny_times_app/src/core/router/app_go_router.gr.dart';
 import 'package:ny_times_app/src/core/router/app_route_enum.dart';
 import 'package:ny_times_app/src/core/styles/app_colors.dart';
 import 'package:ny_times_app/src/core/translations/l10n.dart';
 import 'package:ny_times_app/src/core/utils/constant/app_constants.dart';
-import 'package:ny_times_app/src/core/helper/helper.dart';
 import 'package:ny_times_app/src/features/articles/domain/models/article_model.dart';
+import 'package:ny_times_app/src/shared/presentation/pages/background_page.dart';
+import 'package:ny_times_app/src/shared/presentation/widgets/arrow_back_button_widget.dart';
+import 'package:ny_times_app/src/shared/presentation/widgets/cached_image_widget.dart';
+import 'package:ny_times_app/src/shared/presentation/widgets/custom_app_bar_widget.dart';
 
+@RoutePage()
 class ArticleDetailsPage extends StatefulWidget {
   final ArticleModel model;
 
-  const ArticleDetailsPage({Key? key, required this.model})
-      : super(key: key);
+  const ArticleDetailsPage({Key? key, required this.model}) : super(key: key);
 
   @override
   State<ArticleDetailsPage> createState() => _NyTimesArticlesPageState();
@@ -81,13 +81,10 @@ class _NyTimesArticlesPageState extends State<ArticleDetailsPage> {
                           // Title
                           Text(
                             widget.model.title ?? defaultStr,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineLarge!
-                                .copyWith(
-                                    fontStyle: FontStyle.italic,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 30),
+                            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30),
                           ),
 
                           // Space
@@ -109,10 +106,9 @@ class _NyTimesArticlesPageState extends State<ArticleDetailsPage> {
                           // Caption
                           Text(
                             widget.model.byline ?? defaultStr,
-                            style:
-                                Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
                             textAlign: TextAlign.start,
                           ),
 
@@ -206,10 +202,7 @@ class _NyTimesArticlesPageState extends State<ArticleDetailsPage> {
                             right: 10.w,
                             child: Text(
                               imageCaption ?? defaultStr,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge!
-                                  .copyWith(),
+                              style: Theme.of(context).textTheme.bodyLarge!.copyWith(),
                             ),
                           ),
                       ],
@@ -244,20 +237,17 @@ class _NyTimesArticlesPageState extends State<ArticleDetailsPage> {
                           // See more
                           GestureDetector(
                             onTap: () {
-                              context.pushNamed(
-                                AppRouteEnum.weViewPage.name,
-                                extra: widget.model.url,
-                              );
+                              context.router.replace(WebViewRoute(link: widget.model.url!)
+                                  // AppRouteEnum.weViewPage.name,
+                                  // extra: ,
+                                  );
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
                                   S.of(context).see_more,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(
+                                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                                         wordSpacing: 3,
                                         letterSpacing: 1,
                                         fontWeight: FontWeight.bold,

@@ -39,8 +39,7 @@ class ReloadWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Opacity(
-              opacity: 0.5,
-              child: SvgPicture.asset(image, width: 100.h, height: 100.h)),
+              opacity: 0.5, child: SvgPicture.asset(image, width: 100.h, height: 100.h)),
           const SizedBox(height: 10),
           Text(
             content,

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ny_times_app/src/core/helper/helper.dart';
+import 'package:ny_times_app/src/core/utils/constant/image_constant.dart';
 
 class CachedImageWidget extends StatelessWidget {
   final double? height;
@@ -38,12 +38,12 @@ class CachedImageWidget extends StatelessWidget {
                   width: width,
                   fit: BoxFit.cover,
                   errorWidget: (context, url, error) => Image.asset(
-                    Helper.getImagePath("no_image.png"),
+                    ImagePaths.noImage,
                     fit: BoxFit.contain,
                   ),
                 )
               : Image.asset(
-                  Helper.getImagePath("no_image.png"),
+                  ImagePaths.noImage,
                   height: height,
                   width: width,
                   fit: BoxFit.contain,

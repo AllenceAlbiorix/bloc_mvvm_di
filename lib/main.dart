@@ -3,20 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ny_times_app/src/core/helper/helper.dart';
 import 'package:ny_times_app/src/core/router/app_go_router.dart';
-import 'package:ny_times_app/src/shared/data/data_sources/app_shared_prefs.dart';
 import 'package:ny_times_app/src/core/router/router.dart';
 import 'package:ny_times_app/src/core/styles/app_theme.dart';
 import 'package:ny_times_app/src/core/translations/l10n.dart';
-import 'package:ny_times_app/src/core/helper/helper.dart';
 import 'package:ny_times_app/src/core/utils/injections.dart';
-import 'package:ny_times_app/src/features/intro/presentation/pages/intro_page.dart';
+import 'package:ny_times_app/src/shared/data/data_sources/app_shared_prefs.dart';
 import 'package:provider/provider.dart';
-
 import 'src/shared/domain/entities/language_enum.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
-final goRouter = AppGoRouter.goRouter;
+final goRouter = AppAutoRouter();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -94,15 +92,17 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                 debugShowCheckedModeBanner: false,
                 locale: locale,
                 builder: DevicePreview.appBuilder,
+                routerDelegate: goRouter.delegate(
+                  navigatorObservers: () => [CustomRouteObserver()],
+                ),
+                routeInformationParser: goRouter.defaultRouteParser(),
+                routeInformationProvider: goRouter.routeInfoProvider(),
                 localizationsDelegates: const [
                   S.delegate,
                   GlobalCupertinoLocalizations.delegate,
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
                 ],
-                routeInformationProvider: goRouter.routeInformationProvider,
-                routerDelegate: goRouter.routerDelegate,
-                routeInformationParser: goRouter.routeInformationParser,
                 supportedLocales: const [
                   Locale("ar"),
                   Locale("en"),
